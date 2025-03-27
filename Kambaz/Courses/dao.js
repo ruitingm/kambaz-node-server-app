@@ -18,3 +18,16 @@ export const createCourse = (course) => {
   Database.courses = [...Database.courses, newCourse];
   return newCourse;
 };
+export const deleteCourse = (courseId) => {
+  const { courses, enrollments } = Database;
+  Database.courses = courses.filter((course) => course._id !== courseId);
+  Database.enrollments = enrollments.filter(
+    (enrollment) => enrollment.course !== courseId
+  );
+};
+export const updateCourse = (courseId, courseUpdates) => {
+  const { courses } = Database;
+  const course = courses.find((course) => course._id === courseId);
+  Object.assign(course, courseUpdates);
+  return course;
+};
