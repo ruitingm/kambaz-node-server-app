@@ -25,9 +25,9 @@ export const deleteCourse = (courseId) => {
     (enrollment) => enrollment.course !== courseId
   );
 };
-export const updateCourse = (courseId, courseUpdates) => {
+export function updateCourse(courseId, courseUpdates) {
   const { courses } = Database;
   const course = courses.find((course) => course._id === courseId);
   Object.assign(course, courseUpdates);
   return course;
-};
+}

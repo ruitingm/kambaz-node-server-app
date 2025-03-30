@@ -24,7 +24,10 @@ export default function CourseRoutes(app) {
   });
   app.post("/api/courses/:courseId/modules", (req, res) => {
     const { courseId } = req.params;
-    const module = { ...req.body, course: courseId };
+    const module = {
+      ...req.body,
+      course: courseId,
+    };
     const newModule = modulesDao.createModule(module);
     res.send(newModule);
   });
