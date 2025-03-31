@@ -27,7 +27,9 @@ export const deleteCourse = (courseId) => {
 };
 export function updateCourse(courseId, courseUpdates) {
   const { courses } = Database;
-  const course = courses.find((course) => course._id === courseId);
-  Object.assign(course, courseUpdates);
-  return course;
+  const updatedCourses = courses.map((course) =>
+    course._id === courseId ? { ...course, ...courseUpdates } : course
+  );
+  Database.courses = updatedCourses;
+  return updatedCourses.find((course) => course._id === courseId);
 }

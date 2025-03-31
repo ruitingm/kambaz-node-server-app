@@ -17,9 +17,13 @@ export const deleteAssignment = (assignmentId) => {
 };
 export const updateAssignment = (assignmentId, assignmentUpdates) => {
   const { assignments } = Database;
-  const assignment = assignments.find(
-    (assignment) => assignment._id === assignmentId
+  const updatedAssignments = assignments.map((assignment) =>
+    assignment._id === assignmentId
+      ? { ...assignment, ...assignmentUpdates }
+      : assignment
   );
-  Object.assign(assignment, assignmentUpdates);
-  return assignment;
+  Database.assignments = updatedAssignments;
+  return updatedAssignments.find(
+    (assignment) => assignment._id == assignmentId
+  );
 };
