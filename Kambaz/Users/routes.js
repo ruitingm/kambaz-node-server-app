@@ -30,8 +30,6 @@ export default function UserRoutes(app) {
     if (currentUser) {
       req.session["currentUser"] = currentUser;
       res.json(currentUser);
-      console.log("LOGGING IN:", currentUser);
-      console.log("session: ", req.session);
     } else {
       res.status(401).json({ message: "Unable to login. Try again later." });
     }
@@ -50,11 +48,8 @@ export default function UserRoutes(app) {
   };
   const findCoursesForEnrolledUser = (req, res) => {
     let { userId } = req.params;
-    console.log("req.params:", req.params);
     if (userId === "current") {
       const currentUser = req.session["currentUser"];
-      console.log("currentUser:", currentUser);
-      console.log("Session Data:", req.session);
       if (!currentUser) {
         res.sendStatus(401);
         return;

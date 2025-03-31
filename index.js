@@ -21,6 +21,7 @@ const sessionOptions = {
   saveUninitialized: false,
 };
 if (process.env.NODE_ENV !== "development") {
+  // must set the below if using https
   sessionOptions.proxy = true;
   sessionOptions.cookie = {
     sameSite: "none",
