@@ -9,7 +9,6 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 const app = express();
-console.log(process.env);
 app.use(
   cors({
     credentials: true,
