@@ -9,6 +9,7 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 const app = express();
+console.log(process.env);
 app.use(
   cors({
     credentials: true,
@@ -19,14 +20,13 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
   saveUninitialized: false,
-  cookie: { sameSite: "Lax" },
 };
-if (process.env.NODE_ENV !== "development") {
+if (process.env.NODE_ENV === "development") {
   sessionOptions.proxy = true;
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    domain: process.env.NODE_SERVER_DOMAIN,
+    // domain: process.env.NODE_SERVER_DOMAIN,
   };
 }
 app.use(session(sessionOptions));
