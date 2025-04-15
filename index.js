@@ -9,6 +9,8 @@ import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
+import PostRoutes from "./Kambaz/Posts/routes.js";
+import ReplyRoutes from "./Kambaz/Replies/routes.js";
 const CONNECTION_STRING =
   process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz";
 mongoose.connect(CONNECTION_STRING);
@@ -39,6 +41,8 @@ UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
+PostRoutes(app);
+ReplyRoutes(app);
 Lab5(app);
 Hello(app);
 app.listen(process.env.PORT || 4000);
