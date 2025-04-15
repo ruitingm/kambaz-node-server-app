@@ -5,7 +5,7 @@ const ReplySchema = new mongoose.Schema(
     post: { type: String, ref: "PostModel" },
     user: String,
     reply: String,
-    followup: { user: String, content: String },
+    followup: [{ user: String, content: String }],
   },
   {
     collection: "replies",
