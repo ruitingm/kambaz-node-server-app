@@ -10,3 +10,9 @@ export const createPost = (post) => {
 export const updatePost = (postId, postUpdates) => {
   return model.updateOne({ _id: postId }, postUpdates);
 };
+export const findPostByKeywords = (keywords) => {
+  const regex = new RegExp(keywords, "i");
+  return model.find({
+    $or: [{ post: { $regex: regex } }, { subject: { $regex: regex } }],
+  });
+};

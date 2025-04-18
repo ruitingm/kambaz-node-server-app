@@ -14,6 +14,7 @@ const PostSchema = new mongoose.Schema(
     category: String,
     read: Boolean,
     answered: Boolean,
+    resolved: Boolean,
   },
   {
     collection: "posts",

@@ -63,6 +63,12 @@ export default function CourseRoutes(app) {
   app.get("/api/courses/:cid/users", findUsersForCourse);
   const findPostsForCourse = async (req, res) => {
     const { courseId } = req.params;
+    const { keyword } = req.query;
+    if (keyword) {
+      const posts = await postsDao.findPostByKeywords(keyword);
+      res.json(posts);
+      return;
+    }
     const posts = await postsDao.findPostsForCourse(courseId);
     res.json(posts);
   };
