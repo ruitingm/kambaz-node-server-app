@@ -7,6 +7,11 @@ export default function PostRoutes(app) {
     const status = await postDao.updatePost(postId, postUpdates);
     res.send(status);
   });
+  app.delete("/api/posts/:postId", async (req, res) => {
+    const { postId } = req.params;
+    const status = await postDao.deletePost(postId);
+    res.send(status);
+  });
   const findRepliesForPost = async (req, res) => {
     const { postId } = req.params;
     const posts = await repliesDao.findRepliesForPost(postId);

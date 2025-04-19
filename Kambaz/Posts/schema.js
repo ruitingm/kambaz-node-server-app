@@ -11,10 +11,12 @@ const PostSchema = new mongoose.Schema(
     date: String,
     liked: Boolean,
     role: { type: String, enum: ["STUDENT", "FACULTY", "ADMIN", "USER"] },
-    category: String,
+    category: [String],
     read: Boolean,
     answered: Boolean,
     resolved: Boolean,
+    visible: [String],
+    view: [String],
   },
   {
     collection: "posts",

@@ -10,3 +10,6 @@ export const creatReply = (reply) => {
 export const updateReply = (replyId, replyUpdates) => {
   return model.updateOne({ _id: replyId }, replyUpdates);
 };
+export function deleteReply(replyId) {
+  return model.deleteOne({ _id: replyId });
+}
