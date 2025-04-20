@@ -3,6 +3,7 @@ import * as modulesDao from "../Modules/dao.js";
 import * as assignmentsDao from "../Assignments/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 import * as postsDao from "../Posts/dao.js";
+import * as folderDao from "../Folders/dao.js";
 export default function CourseRoutes(app) {
   app.get("/api/courses", async (req, res) => {
     const courses = await dao.findAllCourses();
@@ -80,4 +81,18 @@ export default function CourseRoutes(app) {
     res.send(newPost);
   };
   app.post("/api/courses/:courseId/posts", createPostForCourse);
+  app.get("/api/courses/:courseId/folders", async (req, res) => {
+    const { courseId } = req.params;
+    const folders = await folderDao.findFoldersForCourse(courseId);
+    res.json(folders);
+  });
+  app.post("/api/courses/:courseId/folders", async (req, res) => {
+    const { courseId } = req.params;
+    const folder = {
+      ...req.body,
+      _id: courseId,
+    };
+    const newFolder = await folderDao.createFolder(folder);
+    res.json(newFolder);
+  });
 }
