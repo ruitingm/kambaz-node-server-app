@@ -8,6 +8,7 @@ const ReplySchema = new mongoose.Schema(
     date: String,
     role: String,
     resolved: Boolean,
+    type: String,
     followup: [{ _id: String, user: String, content: String, date: String }],
   },
   {
