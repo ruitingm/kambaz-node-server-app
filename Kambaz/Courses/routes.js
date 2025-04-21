@@ -62,18 +62,29 @@ export default function CourseRoutes(app) {
     res.json(users);
   };
   app.get("/api/courses/:cid/users", findUsersForCourse);
-  const findPostsForCourse = async (req, res) => {
+  const getPostsForCourse = async (req, res) => {
     const { courseId } = req.params;
-    const { keyword } = req.query;
-    if (keyword) {
-      const posts = await postsDao.findPostByKeywords(keyword);
-      res.json(posts);
-      return;
+    const { keyword, userId, role } = req.query;
+    if (!userId || !role) {
+      return res.status(400).send("Missing userId or role");
     }
-    const posts = await postsDao.findPostsForCourse(courseId);
-    res.json(posts);
+    try {
+      if (keyword) {
+        const posts = await postsDao.findPostByKeywords(
+          courseId,
+          userId,
+          role,
+          keyword
+        );
+        return res.json(posts);
+      }
+      const posts = await postsDao.findPostsForCourse(courseId, userId, role);
+      return res.json(posts);
+    } catch (err) {
+      return res.status(500);
+    }
   };
-  app.get("/api/courses/:courseId/posts", findPostsForCourse);
+  app.get("/api/courses/:courseId/posts", getPostsForCourse);
   const createPostForCourse = async (req, res) => {
     const { courseId } = req.params;
     const post = { ...req.body, course: courseId };

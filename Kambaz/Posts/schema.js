@@ -3,7 +3,7 @@ const PostSchema = new mongoose.Schema(
   {
     _id: String,
     user: String,
-    course: String,
+    course: { type: String, ref: "CourseModel" },
     subject: String,
     type: { type: String, enum: ["note", "question"] },
     private: Boolean,
@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema(
     date: String,
     liked: Boolean,
     role: { type: String, enum: ["STUDENT", "FACULTY", "ADMIN", "USER"] },
-    category: [String],
+    category: { type: [String], ref: "FolderModel" },
     read: Boolean,
     answered: Boolean,
     resolved: Boolean,
